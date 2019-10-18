@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cp "src/pre-commit" "$(git rev-parse --git-dir)/hooks" || { echo "Error. git pre-commit hook not initialized" && exit; }
+
+echo "git pre-commit hook initialized"

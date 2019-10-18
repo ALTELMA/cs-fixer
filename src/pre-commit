@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Run php-cs-fixer on changed files
+
+PATHS=("bin/php-cs-fixer" "vendor/bin/php-cs-fixer");
+
+echo "[GIT COMMIT HOOK] Run PHP-FIXER"
+
+for i in ${PATHS[@]}; do
+    [ -f $i ] && CMD=$i
+done
+
+[ -z $CMD ] && echo "Error: php-cs-fixer not found in " && for i in ${PATHS[@]}; do echo "$i"; done && exit 1
+
+for FILE in `git diff-index --cached --name-only --diff-filter=AM HEAD`; do
+    $CMD fix $FILE -v --config vendor/altelma/cs-fixer/src/.php_cs --dry-run &> /dev/null
+
+    if [ $? != 0 ]; then
+        FILES="$FILES ./$FILE"
+    fi
+done
+
+if [ ! -z "$FILES" ]; then
+    $CMD fix $FILES -v --config vendor/altelma/cs-fixer/src/.php_cs --dry-run
+fi
+
+exit $?

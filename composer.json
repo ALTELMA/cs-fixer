@@ -1,0 +1,17 @@
+{
+    "name": "altelma/cs-fixer",
+    "description": "php-cs-fixer with Github hook and config",
+    "authors": [
+        {
+            "name": "ALTELMA",
+            "email": "nrohtgnohp@gmail.com"
+        }
+    ],
+    "require": {
+        "friendsofphp/php-cs-fixer": "^2.3.2"
+    },
+    "bin": ["src/cs-fixer"],
+    "scripts": {
+        "post-install-cmd": "src/init-hook"
+    }
+}
