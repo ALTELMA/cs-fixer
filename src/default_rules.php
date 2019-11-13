@@ -37,6 +37,7 @@ return [
                 'space_before' => 'one'
             ],
         'php_unit_fqcn_annotation' => false,
+        'no_superfluous_phpdoc_tags' => false,
         'yoda_style' => false
     ]
 ];
